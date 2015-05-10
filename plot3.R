@@ -19,7 +19,9 @@ read_tb <- function() {
   subArq <<- subset(arq,subset=(arq$Date=="1/2/2007"|arq$Date=="2/2/2007"))
   subArq[[1]] <<- as.POSIXct(x = paste(as.Date(subArq[[1]], format = "%d/%m/%Y"),subArq[[2]]))
 }
-if (!exists("subArq") | (nrow(subArq)!= 2880)) read_tb()
+if (!exists("subArq")) {
+  read_tb()
+} else {if (nrow(subArq)!= 2880) {read_tb()}}
 
 # Plot histogram of Energy sub metering
 png("plot3.png", width=480, height=480)
